@@ -12,13 +12,15 @@ app.listen(port, function () {
   console.log("listening on 3000");
 });
 
-const con = mysql.createConnection({
+// my_db 데이터베이스와 연결
+const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "111111",
+  database: "my_db",
 });
 
-con.connect(function (err) {
+connection.connect(function (err) {
   if (err) throw err;
   console.log("Connected");
 });
@@ -27,3 +29,10 @@ con.connect(function (err) {
 app.get("/*", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
+
+connection.query("SELECT * from Users", (error, rows, fields) => {
+  if (error) throw error;
+  console.log("User info is: ", rows);
+});
+
+connection.end();
