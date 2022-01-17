@@ -30,6 +30,6 @@ export default function Login(root) {
   login.classList.add("main-login__page", "replace");
   root.appendChild(login);
 
-  createButton("login-btn");
-  createButton("sign-up");
+  // createButton("login-btn");
+  // createButton("sign-up");
 }
