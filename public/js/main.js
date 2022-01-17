@@ -1,4 +1,4 @@
-// import Header from "./pages/Header.js";
+import Header from "./pages/Header.js";
 // import Navigation from "./pages/Navigation.js";
 // import Home from "./pages/Home.js";
 // import Post from "./pages/Posts.js";
@@ -6,18 +6,19 @@
 // import Login from "./pages/Login.js";
 // import write from "./pages/Write.js";
 
-// const $ = document;
+const $ = document;
 
-// const state = {
-//   state: "main",
-// };
+const state = {
+  state: "main",
+};
 
-// // 처음 페이지가 시작될때 보이는 화면
-// function init() {
-//   const root = $.querySelector("#root");
-//   Header(root);
-//   Navigation(root);
-// }
+// 처음 페이지가 시작될때 보이는 화면
+function init() {
+  const root = $.querySelector("#root");
+  Header(root);
+}
+
+init();
 
 // const currentPage = location.pathname;
 // if (currentPage !== "/") {
