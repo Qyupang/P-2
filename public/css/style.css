@@ -1,0 +1,8 @@
+/* COMPONENTS */
+@import url(header.css);
+/* SCREEN */
+@import url(body.css);
+
+body {
+  margin: 0;
+}
