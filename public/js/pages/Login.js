@@ -8,11 +8,11 @@ export default function Login(root) {
   login.innerHTML = `
   <div class="login-box">
   <h1> Login Page </h1>
-  ID: <input class="login-page__input" id="id" type="text" name="id" pattern="^([a-z0-9_]){6,50}$">
-  Password: <input class="login-page__input" id="password" type="password" name="passwd">
+  ID: <input class="login-page__input" id="id" type="text" name="id" placeholder="아이디를 입력해주세요.">
+  Password: <input class="login-page__input" id="password" type="password" name="passwd" placeholder="비밀번호를 입력해주세요.">
   <div class="login-btn__box">
-  <input type="button" class="login-signup__btn click login-page__input" value="회원가입" >
-  <input type="button" class="login-login-btn click login-page__input" value="로그인">
+  <input type="button" class="login-signUp__btn click login-page__input sign-in" value="회원가입" >
+  <input type="button" class="login-login-btn click login-page__input login-btn" value="로그인">
   </div>
 </div>
       `;
@@ -30,6 +30,6 @@ export default function Login(root) {
   login.classList.add("main-login__page", "replace");
   root.appendChild(login);
 
-  // createButton("login-btn");
-  // createButton("sign-up");
+  createButton("login-btn");
+  createButton("login-signUp__btn");
 }

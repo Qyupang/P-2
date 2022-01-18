@@ -1,5 +1,6 @@
 import Home from "./Home.js";
 import Login from "./Login.js";
+import SignUp from "./signUp.js";
 
 const $ = document;
 
@@ -19,6 +20,10 @@ function moveToRoute(root, purpose) {
     case "main-header__login":
       history.pushState({ data: "login" }, null, "login");
       Login(root);
+      break;
+    case "login-signUp__btn":
+      history.pushState({ data: "sign-up" }, null, "sign-up");
+      SignUp(root);
       break;
   }
 }

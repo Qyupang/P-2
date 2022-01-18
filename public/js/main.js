@@ -1,6 +1,7 @@
 import Header from "./pages/Header.js";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
+import SignUp from "./pages/signUp.js";
 
 const $ = document;
 
@@ -26,6 +27,9 @@ if (currentPage !== "/") {
     case "/login":
       Login(root);
       break;
+    case "/sign-up":
+      SignUp(root);
+      break;
   }
 }
 
@@ -44,6 +48,9 @@ window.addEventListener("popstate", () => {
         console.log("true");
         Home(root);
       }
+      break;
+    case "/sign-up":
+      SignUp(root);
       break;
   }
 });
