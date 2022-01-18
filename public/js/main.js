@@ -44,10 +44,7 @@ window.addEventListener("popstate", () => {
       Home(root);
       break;
     case "/login":
-      if (Login(root)) {
-        console.log("true");
-        Home(root);
-      }
+      Login(root);
       break;
     case "/sign-up":
       SignUp(root);
