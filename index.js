@@ -39,20 +39,24 @@ app.get("/*", function (req, res) {
 //   console.log(rows[0].region);
 // });
 
+// 회원가입에 성공하였다면
 app.post("/login", (req, res) => {
   var id = req.body.id;
   var pw = req.body.passwd;
   var region = req.body.location;
   console.log(id, pw, region);
-  // connection.query(
-  //   "INSERT INTO user (id, password, region) VALUES ('test', 'test', '광교');"
-  //   (error) => {
-  //     if (error) throw error;
-  //   }
-  // );
-  res.sendFile(__dirname + "/index.html");
+
+  var sql = "INSERT INTO users (id, password, region) VALUES (?, ?, ?)";
+  connection.query(sql, [id, pw, region], function (err, result, field) {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Internal Server  Error");
+    }
+    res.sendFile(__dirname + "/index.html");
+  });
 });
 
+// 로그인이 되었다면
 app.post("/signed/home", (req, res) => {
   var id = req.body.id;
   var pw = req.body.passwd;
@@ -62,4 +66,4 @@ app.post("/signed/home", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-connection.end();
+// connection.end();

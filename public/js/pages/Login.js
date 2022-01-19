@@ -24,10 +24,6 @@ export default function Login(root) {
   if (toBeReplaced) {
     toBeReplaced.remove();
   }
-  const toBeReplacedNav = $.querySelector(".replace-on");
-  if (toBeReplacedNav) {
-    toBeReplacedNav.remove();
-  }
 
   login.classList.add("main-login__page", "replace");
   root.appendChild(login);
