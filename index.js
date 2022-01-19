@@ -36,39 +36,65 @@ app.get("/*", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-// connection.query("SELECT * from Users", (error, rows, fields) => {
-//   if (error) throw error;
-//   console.log("User info is: ", rows);
-//   console.log(rows[0].region);
-// });
-
 // 회원가입에 성공하였다면
-app.post("/login", (req, res) => {
-  var id = req.body.id;
-  var pw = req.body.passwd;
-  var region = req.body.location;
-  console.log(id, pw, region);
-
+//   // 입력된 값들을 데이터베이스에 넣어준다.
+//   var sql = "INSERT INTO users (id, password, region) VALUES (?, ?, ?)";
+//   connection.query(sql, [id, pw, region], function (err, result, field) {
+//     if (err) {
+//       console.log(err);
+//       res.status(500).send("Internal Server  Error");
+//     }
+//     res.sendFile(__dirname + "/index.html"); // 화면 생성에 이용됨
+//   });
+// });
+app.post("/login", function (request, response) {
+  var username = request.body.id;
+  var password = request.body.passwd;
+  var region = request.body.location;
+  console.log(username, password, region);
   // 입력된 값들을 데이터베이스에 넣어준다.
-  var sql = "INSERT INTO users (id, password, region) VALUES (?, ?, ?)";
-  connection.query(sql, [id, pw, region], function (err, result, field) {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Internal Server  Error");
-    }
-    res.sendFile(__dirname + "/index.html"); // 화면 생성에 이용됨
-  });
+  // 값들이 다 입력되었다면
+  if (username && password && region) {
+    const sql =
+      "SELECT * FROM users WHERE id = ? AND password = ? AND region = ?";
+    connection.query(
+      sql,
+      [username, password, region],
+      function (error, results, fields) {
+        if (error) throw error;
+        if (results.length <= 0) {
+          const sql = "INSERT INTO users (id, password, region) VALUES(?,?,?)";
+          connection.query(
+            sql,
+            [username, password, region],
+            function (error, data) {
+              if (error) console.log(error);
+              else console.log(data);
+            }
+          );
+          response.send(
+            '<script type="text/javascript">alert("회원가입을 환영합니다! 다시 로그인해주세요."); document.location.href="/login";</script>'
+          );
+        } else {
+          response.send(
+            '<script type="text/javascript">alert("이미 존재하는 아이디 입니다."); document.location.href="/sign-up";</script>'
+          );
+        }
+        response.end();
+      }
+    );
+  }
+  // 값이 다 입력되지 않았다면
+  else {
+    response.send(
+      '<script type="text/javascript">alert("모든 정보를 입력하세요"); document.location.href="/sign-up";</script>'
+    );
+    response.end();
+  }
+  response.sendFile(__dirname + "/index.html");
 });
 
 // 로그인이 되었다면
-// app.post("/signed/home", (req, res) => {
-//   var id = req.body.id;
-//   var pw = req.body.passwd;
-
-//   console.log(id, pw);
-
-//   res.sendFile(__dirname + "/index.html");
-// });
 app.post("/signed/home", function (request, response) {
   var username = request.body.id;
   var password = request.body.passwd;

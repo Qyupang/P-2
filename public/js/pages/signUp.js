@@ -37,7 +37,7 @@ export default function signUp() {
       const signUp = $.querySelector(".signUp-signUp__btn");
 
       signUp.addEventListener("click", function () {
-        alert(`회원가입을 축하합니다!! 다시 로그인 해주세요`);
+        // alert(`회원가입을 축하합니다!! 다시 로그인 해주세요`);
         // history.go(-1);
       });
     }
