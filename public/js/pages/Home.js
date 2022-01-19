@@ -1,3 +1,6 @@
+// 도시별 매물 추가
+import createButton from "./Button.js";
+
 const $ = document;
 
 export default function Home(root) {
@@ -6,9 +9,9 @@ export default function Home(root) {
   <form action="post" class="home-selection-box">
   <select name="regions" id="home-region-select">
     <option value="">-- 지역을 선택하세요 --</option>
-    <option value="gwanggyo">광교</option>
-    <option value="wooman">우만동</option>
-    <option value="pangyo">판교</option>
+    <option class="gwanggyo" value="gwanggyo">광교</option>
+    <option class="wooman" value="wooman">우만동</option>
+    <option class="pangyo" value="pangyo">판교</option>
   </select>
 </form>
           `;
@@ -19,6 +22,24 @@ export default function Home(root) {
     toBeReplaced.remove();
   }
 
-  home.classList.add("main-home__message", "replace");
+  home.classList.add("replace");
   root.appendChild(home);
+
+  const selection = $.querySelector(".home-selection-box");
+
+  selection.addEventListener("change", function (event) {
+    const selectedRegion = event.target.value;
+    console.log(selectedRegion);
+    switch (selectedRegion) {
+      case "gwanggyo":
+        history.pushState({ data: "gwanggyo" }, null, "gwanggyo");
+        break;
+      case "wooman":
+        history.pushState({ data: "wooman" }, null, "wooman");
+        break;
+      case "pangyo":
+        history.pushState({ data: "pangyo" }, null, "pangyo");
+        break;
+    }
+  });
 }
