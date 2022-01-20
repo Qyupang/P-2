@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+require("dotenv").config();
 
 const port = 3000;
 const app = express();
@@ -20,9 +21,9 @@ app.listen(port, function () {
 // my_db 데이터베이스와 연결
 const connection = mysql.createConnection({
   host: "localhost", // 호스트 주소
-  user: "root", // mysql user
-  password: "111111", // mysql password
-  database: "my_db", // mysql 데이터베이스
+  user: process.env.DATABASE_USERNAME, // mysql user
+  password: process.env.DATABASE_PASSWORD, // mysql password
+  database: process.env.DATABASE_NAME, // mysql 데이터베이스
 });
 
 // 데이터베이스와 연결
@@ -48,9 +49,9 @@ app.get("/*", function (req, res) {
 //   });
 // });
 app.post("/login", function (request, response) {
-  var username = request.body.id;
-  var password = request.body.passwd;
-  var region = request.body.location;
+  const username = request.body.id;
+  const password = request.body.passwd;
+  const region = request.body.location;
   console.log(username, password, region);
   // 입력된 값들을 데이터베이스에 넣어준다.
   // 값들이 다 입력되었다면
@@ -96,8 +97,8 @@ app.post("/login", function (request, response) {
 
 // 로그인이 되었다면
 app.post("/signed/home", function (request, response) {
-  var username = request.body.id;
-  var password = request.body.passwd;
+  const username = request.body.id;
+  const password = request.body.passwd;
   if (username && password) {
     connection.query(
       "SELECT * FROM users WHERE id = ? AND password = ?",
