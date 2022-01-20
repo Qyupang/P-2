@@ -5,3 +5,25 @@
   font-size: 40px;
   font-weight: 900;
 }
+
+select::-ms-expand {
+  display: none;
+}
+
+.home-selection-box {
+  /* display: flex; */
+  text-align: center;
+}
+
+#home-region-select {
+  -o-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 20px;
+  border: none;
+  padding: 30px;
+  width: 100%;
+  text-align: center;
+  border-bottom: 5px solid grey;
+}

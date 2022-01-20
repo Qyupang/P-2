@@ -12,7 +12,7 @@ const state = {
 // 처음 페이지가 시작될때 보이는 화면
 function init() {
   const root = $.querySelector("#root");
-  Header(root);
+  Header(root, 0);
 }
 
 init();
@@ -23,6 +23,9 @@ if (currentPage !== "/") {
   switch (currentPage) {
     case "/home":
       Home(root);
+      break;
+    case "/signed/home":
+      Header(root, 1);
       break;
     case "/login":
       Login(root);
@@ -39,6 +42,9 @@ window.addEventListener("popstate", () => {
   switch (currentPage) {
     case "/home":
       Home(root);
+      break;
+    case "/signed/home":
+      Header(root, 1);
       break;
     case "/":
       Home(root);
