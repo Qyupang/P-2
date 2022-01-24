@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const axios = require("axios");
 require("dotenv").config();
 
 const port = 3000;
@@ -38,16 +39,6 @@ app.get("/*", function (req, res) {
 });
 
 // 회원가입에 성공하였다면
-//   // 입력된 값들을 데이터베이스에 넣어준다.
-//   var sql = "INSERT INTO users (id, password, region) VALUES (?, ?, ?)";
-//   connection.query(sql, [id, pw, region], function (err, result, field) {
-//     if (err) {
-//       console.log(err);
-//       res.status(500).send("Internal Server  Error");
-//     }
-//     res.sendFile(__dirname + "/index.html"); // 화면 생성에 이용됨
-//   });
-// });
 app.post("/login", function (request, response) {
   const username = request.body.id;
   const password = request.body.passwd;
@@ -96,34 +87,34 @@ app.post("/login", function (request, response) {
 });
 
 // 로그인이 되었다면
-app.post("/signed/home", function (request, response) {
-  const username = request.body.id;
-  const password = request.body.passwd;
-  if (username && password) {
-    connection.query(
-      "SELECT * FROM users WHERE id = ? AND password = ?",
-      [username, password],
-      function (error, results, fields) {
-        if (error) throw error;
-        if (results.length > 0) {
-          // request.session.loggedin = true;
-          // request.session.username = username;
-          response.redirect("/signed/home");
-          response.end();
-        } else {
-          response.send(
-            '<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); document.location.href="/login";</script>'
-          );
-        }
-      }
-    );
-  } else {
-    response.send(
-      '<script type="text/javascript">alert("username과 password를 입력하세요!"); document.location.href="/login";</script>'
-    );
-    response.end();
-  }
-});
+// app.post("/signed/home", function (request, response) {
+//   const username = request.body.id;
+//   const password = request.body.passwd;
+//   if (username && password) {
+//     connection.query(
+//       "SELECT * FROM users WHERE id = ? AND password = ?",
+//       [username, password],
+//       function (error, results, fields) {
+//         if (error) throw error;
+//         if (results.length > 0) {
+//           // request.session.loggedin = true;
+//           // request.session.username = username;
+//           response.redirect("/signed/home");
+//           response.end();
+//         } else {
+//           response.send(
+//             '<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); document.location.href="/login";</script>'
+//           );
+//         }
+//       }
+//     );
+//   } else {
+//     response.send(
+//       '<script type="text/javascript">alert("username과 password를 입력하세요!"); document.location.href="/login";</script>'
+//     );
+//     response.end();
+//   }
+// });
 
 // 이부분 사용되면 회원가입에서 오류 발생
 // connection.end();

@@ -22,7 +22,31 @@
       src="https://kit.fontawesome.com/6478f529f2.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/index.js"></script>
     <script type="module" src="/js/main.js"></script>
+    <!-- <script>
+      const button = $.querySelector(".login-btn");
+      const userId = $.querySelector("#id");
+      const passwd = $.querySelector("#password");
+      button.addEventListener("click", () => {
+        let username = userId.value;
+        let password = passwd.value;
+
+        $.ajax({
+          type: "POST",
+          url: "/home",
+          data: {
+            username: username,
+            password: password,
+          },
+          dataType: "json",
+          success: (response) => {
+            console.log(response);
+          },
+        });
+      });
+    </script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
   </body>
 </html>
